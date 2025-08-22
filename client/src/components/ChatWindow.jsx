@@ -38,6 +38,11 @@ export default function ChatWindow({
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
+        //tryy debugging
+           if (!Array.isArray(data)) {
+      console.error("❌ Messages response is not an array:", data);
+      return;
+    }
         setMessages(data);
 
         await fetch(`${API}/api/messages/markseen/${partner}`, {
@@ -47,7 +52,8 @@ export default function ChatWindow({
       } catch (e) {
         console.error("❌ Fetch messages failed:", e);
       }
-    })();
+      }, [currentUser?._id, selectedUser?._id]);
+    // })();
 
     const handler = (msg) => {
       const match =

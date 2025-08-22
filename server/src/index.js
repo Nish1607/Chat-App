@@ -1,20 +1,4 @@
 // // server/src/index.js
-// import express from "express";
-// import http from "http";
-// import { Server } from "socket.io";
-// import cors from "cors";
-// import dotenv from "dotenv";
-// import connectDB from "./config/db.js";
-// import mongoose from "mongoose";
-// import authRoutes from "./routes/auth.js";
-// import userRoutes from "./routes/users.js";
-// // import { userRoutes } from "./routes/users.js";
-// import messageRoutes from "./routes/messages.js";
-// import Message from "./models/Message.js"; // ✅ IMPORT Message model
-// import { verifyToken } from "../src/controllers/authController.js"; // ✅ import it here
-// import User from "./models/User.js"; // ✅ Import User model for direct route
-// dotenv.config();
-// const PORT = process.env.PORT || 5000;
 
 // // ─── Express + CORS
 // const app = express();
@@ -57,51 +41,6 @@
 //     methods: ["GET", "POST"]
 //   }
 // });
-// app.set("io", io); // ✅ Add this
-
-
-// io.on("connection", (socket) => {
-//   console.log("⚡ Client connected:", socket.id);
-
-//   socket.on("setup", (userId) => {
-//     socket.join(userId);
-//     socket.emit("connected");
-//   });
-
-//   socket.on("new message", async (msg) => {
-//     const { from, to, text } = msg;
-
-//     if (!from || !to || !text?.trim()) return;
-
-//     try {
-//       // ✅ Save message to DB
-//       const savedMsg = await Message.create({ from, to, text });
-
-//       // ✅ Send to recipient (for chat window and sidebar)
-//       // io.to(to).emit("message received", savedMsg);
-
-//       // ✅ Send to sender (so sidebar reorders too)
-//       io.to(from).emit("message sent", savedMsg);
-//     } catch (err) {
-//       console.error("❌ Error saving message:", err.message);
-//     }
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("❌", socket.id, "disconnected");
-//   });
-// });
-
-// // ─── Start server after DB connection 
-// connectDB()
-//   .then(() =>
-//     server.listen(PORT, () =>
-//       console.log(`✅ HTTP & Socket server on http://localhost:${PORT}`)
-//     )
-//   )
-//   .catch((err) => {
-//     console.error("❌ MongoDB connection error:", err);
-//   });
 
 import express from "express";
 import http from "http";
