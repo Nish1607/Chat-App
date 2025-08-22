@@ -1,5 +1,4 @@
 //  server/src/index.js
-
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
@@ -18,9 +17,10 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
-  "https://chat-app-nine-delta-31.vercel.app/", // your actual Vercel frontend URL
+  "https://chat-app-nine-delta-31.vercel.app", // your actual Vercel frontend URL
   "http://localhost:5173",                   // for local testing (optional)
 ];
+const app = express(); // ✅ This must come BEFORE app.use
 
 app.use(express.json());
 
@@ -30,9 +30,6 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-
-
 
 
 // ✅ API Routes
