@@ -15,12 +15,14 @@ const Login = () => {
       const res = await axiosInstance.post("/auth/login", data);
       const user = res.data.user; 
       const token = res.data.token;
-      console.log("🧾 FULL LOGIN RESPONSE:", res.data);
+      // console.log("🧾 FULL LOGIN RESPONSE:", res.data);
 
       if (!user || !token) {
         throw new Error("Missing user or token in response");
       }
-      console.log("✅ Logged in:", res.data);
+      console.log("Base URL is: ", import.meta.env.VITE_API_URL);
+
+      // console.log("✅ Logged in:", res.data);
       localStorage.setItem("token", token);
       localStorage.setItem("chat-user", JSON.stringify(user));
       setUser(user); // important!
