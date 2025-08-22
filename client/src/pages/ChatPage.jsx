@@ -110,7 +110,6 @@ const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
     const token = localStorage.getItem("token");
 
     axios
-      // .put(`http://localhost:5000/api/messages/markseen/${selectedUser._id}`, null, {
         .put(`${API}/messages/markseen/${selectedUser._id}`, null, {
 
         headers: { Authorization: `Bearer ${token}` },
@@ -118,7 +117,6 @@ const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
       .catch((err) => console.error("❌ Mark seen failed:", err));
 
     axios
-      // .get(`http://localhost:5000/api/messages/${me._id}/${selectedUser._id}`, {
         .get(`${API}/messages/${me._id}/${selectedUser._id}`, {
 
         headers: { Authorization: `Bearer ${token}` },
