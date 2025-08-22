@@ -222,24 +222,32 @@ export default function ChatWindow({
       </div>
 <form
   onSubmit={send}
-  className="sticky bottom-0 w-full border-t bg-white px-4 py-3 md:px-6 md:py-4 md:pb-4 pb-[calc(env(safe-area-inset-bottom)+12px)]"
+  className="sticky bottom-0 left-0 right-0 z-10 border-t bg-white"
 >
-  {/* cap width on bigger screens; remove max-w-3xl if you want full width */}
-  <div className="mx-auto w-full max-w-3xl flex items-center gap-2">
-    <input
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      placeholder="Type a message"
-      className="flex-1 min-w-0 w-full px-4 py-3 md:py-2 border rounded-full focus:outline-none"
-    />
-    <button
-      type="submit"
-      className="px-6 py-2 bg-purple-500 text-white rounded-full hover:bg-purple-600"
-    >
-      Send
-    </button>
+  {/* mobile spacing + iOS safe-area; overridden on md+ */}
+  <div className="px-3 py-3 md:px-6 md:py-4 pb-[calc(env(safe-area-inset-bottom)+12px)] md:pb-4">
+    {/* cap width on laptops/desktops; remove md:max-w-3xl md:mx-auto for full-width */}
+    <div className="w-full md:max-w-3xl md:mx-auto flex items-center gap-2">
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Type a message"
+        className="flex-1 min-w-0 w-full h-11 md:h-10 px-4 border rounded-full
+                   focus:outline-none focus:ring-2 focus:ring-purple-300"
+      />
+      <button
+        type="submit"
+        className="h-11 md:h-10 px-5 whitespace-nowrap bg-purple-500 text-white
+                   rounded-full hover:bg-purple-600 focus:outline-none
+                   focus:ring-2 focus:ring-purple-300"
+      >
+        Send
+      </button>
+    </div>
   </div>
 </form>
+
 
     </section>
   );
