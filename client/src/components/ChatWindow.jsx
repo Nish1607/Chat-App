@@ -220,33 +220,31 @@ export default function ChatWindow({
 
         <div ref={bottomRef} />
       </div>
+
+      // Put this at the bottom of your main chat column (not inside any max-w container)
 <form
   onSubmit={send}
-  className="sticky bottom-0 left-0 right-0 z-10 border-t bg-white"
+  className="sticky bottom-0 left-0 right-0 z-10 w-full border-t bg-white"
 >
-  {/* mobile spacing + iOS safe-area; overridden on md+ */}
-  <div className="px-3 py-3 md:px-6 md:py-4 pb-[calc(env(safe-area-inset-bottom)+12px)] md:pb-4">
-    {/* cap width on laptops/desktops; remove md:max-w-3xl md:mx-auto for full-width */}
-    <div className="w-full md:max-w-3xl md:mx-auto flex items-center gap-2">
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Type a message"
-        className="flex-1 min-w-0 w-full h-11 md:h-10 px-4 border rounded-full
-                   focus:outline-none focus:ring-2 focus:ring-purple-300"
-      />
-      <button
-        type="submit"
-        className="h-11 md:h-10 px-5 whitespace-nowrap bg-purple-500 text-white
-                   rounded-full hover:bg-purple-600 focus:outline-none
-                   focus:ring-2 focus:ring-purple-300"
-      >
-        Send
-      </button>
-    </div>
+  <div className="flex items-center gap-2 px-3 py-3 md:px-6 md:py-4">
+    <input
+      type="text"
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      placeholder="Type a message"
+      className="flex-1 min-w-0 w-full h-11 px-4 border rounded-full
+                 focus:outline-none focus:ring-2 focus:ring-purple-300"
+    />
+    <button
+      type="submit"
+      className="h-11 px-5 bg-purple-500 text-white rounded-full hover:bg-purple-600
+                 focus:outline-none focus:ring-2 focus:ring-purple-300"
+    >
+      Send
+    </button>
   </div>
 </form>
+
 
 
     </section>
