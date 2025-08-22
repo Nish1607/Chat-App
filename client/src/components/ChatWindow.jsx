@@ -225,7 +225,9 @@ export default function ChatWindow({
   onSubmit={send}
   className="sticky bottom-0 left-0 right-0 z-10 w-full border-t bg-white"
 >
-  <div className="flex items-center gap-2 px-3 py-3 md:px-6 md:py-4">
+  {/* <div className="flex items-center gap-2 px-3 py-3 md:px-6 md:py-4"> */}
+  <div className="flex items-center gap-2 px-3 py-3 md:px-6 md:py-4
+                  pb-[calc(env(safe-area-inset-bottom)+12px)] md:pb-4">
     <input
       type="text"
       value={text}
