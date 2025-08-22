@@ -52,8 +52,7 @@ export default function ChatWindow({
       } catch (e) {
         console.error("❌ Fetch messages failed:", e);
       }
-      }, [currentUser?._id, selectedUser?._id]);
-    // })();
+    })();
 
     const handler = (msg) => {
       const match =
