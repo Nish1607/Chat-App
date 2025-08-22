@@ -221,7 +221,6 @@ export default function ChatWindow({
         <div ref={bottomRef} />
       </div>
 
-      // Put this at the bottom of your main chat column (not inside any max-w container)
 <form
   onSubmit={send}
   className="sticky bottom-0 left-0 right-0 z-10 w-full border-t bg-white"
