@@ -124,10 +124,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // ✅ Get allowed origins from env
-const allowedOrigins = (process.env.CLIENT_URL || "")
-  .split(",")
-  .map(origin => origin.trim());
-
+// const allowedOrigins = (process.env.CLIENT_URL || "")
+//   .split(",")
+//   .map(origin => origin.trim());
+const allowedOrigins = [
+  "https://chat-app-one-omega-15.vercel.app", // your actual Vercel frontend URL
+  "http://localhost:5173",                   // for local testing (optional)
+];
 // ✅ Setup CORS
 app.use(cors({
   origin: allowedOrigins,
@@ -158,7 +161,7 @@ const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
     credentials: true,
-    methods: ["GET", "POST"]
+    // methods: ["GET", "POST"]
   }
 });
 
