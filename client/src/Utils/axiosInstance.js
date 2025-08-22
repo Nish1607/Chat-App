@@ -5,7 +5,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   // baseURL: "http://localhost:5000/api",
-  baseURL: import.meta.env.VITE_API_URL || "https://chat-app-7937.onrender.com",
+  baseURL: import.meta.env.VITE_API_URL || "https://chat-app-7937.onrender.com/api",
 
   withCredentials: true,
 });
