@@ -17,7 +17,7 @@ const Register = () => {
   const handleRegister = async (data) => {
     try {
       const res = await axiosInstance.post("/auth/register", data);
-      console.log(" FULL REGISTER RESPONSE:", res.data);
+      // console.log(" FULL REGISTER RESPONSE:", res.data);
 
       const user = res.data.user || res.data;
       const token = res.data.token;
@@ -25,7 +25,7 @@ const Register = () => {
       // if (!user || !token) throw new Error("Missing user or token");
 
       localStorage.setItem("token", token);
-      console.log(token);
+      // console.log(token);
       localStorage.setItem("chat-user", JSON.stringify(user));
       setUser(user);
       setNewUserId(user.id || user._id);
