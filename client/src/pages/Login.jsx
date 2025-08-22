@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const handleLogin = async (data) => {
     try {
-      const res = await axiosInstance.post("api/auth/login", data);
+      const res = await axiosInstance.post("/api/auth/login", data);
       const user = res.data.user; 
       const token = res.data.token;
       // console.log("🧾 FULL LOGIN RESPONSE:", res.data);
