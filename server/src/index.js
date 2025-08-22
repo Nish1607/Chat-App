@@ -103,7 +103,6 @@
 //     console.error("❌ MongoDB connection error:", err);
 //   });
 
-
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
@@ -121,40 +120,39 @@ import User from "./models/User.js";
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Re-enable Express app
+// ✅ Setup Express app
 const app = express();
 
-// ✅ Allow multiple origins from env
+// ✅ Get allowed origins from env
 const allowedOrigins = (process.env.CLIENT_URL || "")
   .split(",")
   .map(origin => origin.trim());
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// ✅ Setup CORS
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.use(express.json());
 
-// ─── REST routes 
+// ✅ API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.get("/", (req, res) => res.send("✅ Chat backend is live"));
+app.get("/", (req, res) => res.send("✅ Backend is live"));
 
-// 404 fallback
+// ✅ Error Handling
 app.use((req, res) => res.status(404).json({ error: "Not Found" }));
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "Server error" });
 });
 
-// ─── Socket.IO setup 
+// ✅ Socket.IO setup
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -167,7 +165,7 @@ const io = new Server(server, {
 app.set("io", io);
 
 io.on("connection", (socket) => {
-  console.log("⚡ Client connected:", socket.id);
+  console.log("⚡ Socket connected:", socket.id);
 
   socket.on("setup", (userId) => {
     socket.join(userId);
@@ -177,27 +175,24 @@ io.on("connection", (socket) => {
   socket.on("new message", async (msg) => {
     const { from, to, text } = msg;
     if (!from || !to || !text?.trim()) return;
-
     try {
       const savedMsg = await Message.create({ from, to, text });
       io.to(from).emit("message sent", savedMsg);
     } catch (err) {
-      console.error("❌ Error saving message:", err.message);
+      console.error("❌ Error:", err.message);
     }
   });
 
   socket.on("disconnect", () => {
-    console.log("❌", socket.id, "disconnected");
+    console.log("❌ Disconnected:", socket.id);
   });
 });
 
-// ─── Start server after DB connection 
+// ✅ Connect to DB and start server
 connectDB()
-  .then(() =>
-    server.listen(PORT, () =>
-      console.log(`✅ HTTP & Socket server on http://localhost:${PORT}`)
-    )
-  )
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
+  .then(() => server.listen(PORT, () => {
+    console.log(`✅ Server running on http://localhost:${PORT}`);
+  }))
+  .catch(err => {
+    console.error("❌ DB connection error:", err);
   });
