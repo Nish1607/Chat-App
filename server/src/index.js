@@ -16,15 +16,15 @@ import User from "./models/User.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
-const cors = require("cors");
+// const cors = require("cors");
 
 // ✅ Setup Express app
-
 
 // ✅ Get allowed origins from env
 // const allowedOrigins = (process.env.CLIENT_URL || "")
 //   .split(",")
 //   .map(origin => origin.trim());
+
 const allowedOrigins = [
   "https://chat-app-nine-delta-31.vercel.app/", // your actual Vercel frontend URL
   "http://localhost:5173",                   // for local testing (optional)
