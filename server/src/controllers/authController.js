@@ -84,7 +84,7 @@ export const login = async (req, res) => {
   { expiresIn: "7d" }
 );
     
-    console.log("🎟️ NEW token issued:", token);
+    // console.log("🎟️ NEW token issued:", token);
 
     res.status(200).json({
       token,

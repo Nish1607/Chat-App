@@ -45,32 +45,6 @@ router.get("/", verifyToken, async (req, res) => {
 });
 
 
-// Update avatar and username
-// router.put("/update-avatar", verifyToken, async (req, res) => {
-//     const userId = req.user.id || req.user._id;
-//   const { username, profilePic } = req.body;
-
-//    try {
-//     const profilePicVersion = Date.now(); // cache-buster
-//     const updatedUser = await User.findByIdAndUpdate(
-//       userId,
-//       { profilePic, profilePicVersion },
-//       { new: true, select: "username profilePic profilePicVersion" }
-//     );
-
-//     // EMIT to everyone who needs to know (or io.emit if simple)
-//     req.app.get("io").emit("user:profile_updated", {
-//       userId: String(updatedUser._id || userId),
-//       profilePic: updatedUser.profilePic,
-//       profilePicVersion: updatedUser.profilePicVersion,
-//     });
-
-//     res.json({ user: updatedUser });
-//   } catch (err) {
-//     console.error("Update error:", err.message);
-//     res.status(500).json({ error: "Failed to update profile" });
-//   }
-// });
 
 // PUT /api/users/update-avatar
 router.put("/update-avatar", verifyToken, async (req, res) => {
