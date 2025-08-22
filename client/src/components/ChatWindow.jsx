@@ -221,12 +221,13 @@ export default function ChatWindow({
 
         <div ref={bottomRef} />
       </div>
-
-      <form onSubmit={send}   className="sticky bottom-0 w-full border-t bg-white px-4 py-3 md:px-6 md:py-4 md:pb-4 pb-[calc(env(safe-area-inset-bottom)+12px)]"
+<form
+  onSubmit={send}
+  className="sticky bottom-0 w-full border-t bg-white px-4 py-3 md:px-6 md:py-4 md:pb-4 pb-[calc(env(safe-area-inset-bottom)+12px)]"
 >
-       <div className="mx-auto max-w-3xl flex items-center gap-2">
+  {/* cap width on bigger screens; remove max-w-3xl if you want full width */}
+  <div className="mx-auto w-full max-w-3xl flex items-center gap-2">
     <input
-      type="text"
       value={text}
       onChange={(e) => setText(e.target.value)}
       placeholder="Type a message"
@@ -240,6 +241,7 @@ export default function ChatWindow({
     </button>
   </div>
 </form>
+
     </section>
   );
 }
