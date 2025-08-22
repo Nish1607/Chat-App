@@ -13,7 +13,8 @@ export default function ChatPage() {
   const [avatarBust, setAvatarBust] = useState({});
 const [sidebarOpen, setSidebarOpen] = useState(false);
 const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  
+    const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const [me, setMe] = useState(() => {
     try {
       const token = localStorage.getItem("token");
@@ -109,13 +110,17 @@ const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
     const token = localStorage.getItem("token");
 
     axios
-      .put(`http://localhost:5000/api/messages/markseen/${selectedUser._id}`, null, {
+      // .put(`http://localhost:5000/api/messages/markseen/${selectedUser._id}`, null, {
+        .put(`${API}/messages/markseen/${selectedUser._id}`, null, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .catch((err) => console.error("❌ Mark seen failed:", err));
 
     axios
-      .get(`http://localhost:5000/api/messages/${me._id}/${selectedUser._id}`, {
+      // .get(`http://localhost:5000/api/messages/${me._id}/${selectedUser._id}`, {
+        .get(`${API}/messages/${me._id}/${selectedUser._id}`, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setMessages(res.data))
@@ -125,25 +130,7 @@ const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   return (
     <div className="flex flex-col h-screen overflow-hidden font-sans shadow-2xl">
       <Header onProfileUpdated={handleProfileUpdated} onOpenSidebar={() => setSidebarOpen(true)}/>
-      {/* <main className="flex flex-1 overflow-hidden">
-        <Sidebar
-          users={users}
-          setUsers={setUsers}
-          selectedId={selectedUser?._id}
-          onSelect={setSelectedUser}
-          avatarBust={avatarBust}
-        />
-        {selectedUser && me && (
-          <ChatWindow
-            key={selectedUser._id}
-            selectedUser={selectedUser}
-            messages={messages}
-            setMessages={setMessages}
-            currentUser={me}          
-            avatarBust={avatarBust}   
-          />
-        )}
-      </main> */}
+     
 
       
 <main className="flex flex-1 overflow-hidden">

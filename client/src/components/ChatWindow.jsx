@@ -33,7 +33,8 @@ export default function ChatWindow({
 
     (async () => {
       try {
-        const res = await fetch(`${API}/api/messages/${me}/${partner}`, {
+        // const res = await fetch(`${API}/api/messages/${me}/${partner}`, {
+          const res = await fetch(`${API}/messages/${me}/${partner}`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -45,7 +46,8 @@ export default function ChatWindow({
     }
         setMessages(data);
 
-        await fetch(`${API}/api/messages/markseen/${partner}`, {
+        // await fetch(`${API}/api/messages/markseen/${partner}`, {
+        await fetch(`${API}/messages/markseen/${partner}`, {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}` },
         });
