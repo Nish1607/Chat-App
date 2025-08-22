@@ -1,23 +1,4 @@
-// // server/src/index.js
-
-
-// // 404 fallback
-// app.use((req, res) => res.status(404).json({ error: "Not Found" }));
-// app.use((err, req, res, next) => {
-//   console.error(err);
-//   res.status(500).json({ error: "Server error" });
-// });
-
-// // ─── Socket.IO setup 
-// const server = http.createServer(app);
-// const io = new Server(server, {
-//   // cors: { origin: "http://localhost:5173", credentials: true },
-//     cors: {
-//     origin: allowedOrigins, // use the same allowedOrigins as above
-//     credentials: true,
-//     methods: ["GET", "POST"]
-//   }
-// });
+//  server/src/index.js
 
 import express from "express";
 import http from "http";
@@ -35,6 +16,7 @@ import User from "./models/User.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
+const cors = require("cors");
 
 // ✅ Setup Express app
 const app = express();
@@ -48,12 +30,28 @@ const allowedOrigins = [
   "http://localhost:5173",                   // for local testing (optional)
 ];
 // ✅ Setup CORS
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
+
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin like mobile apps or curl
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
