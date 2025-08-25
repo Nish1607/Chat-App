@@ -148,9 +148,9 @@ export default function ChatWindow({
     // <section className="flex flex-col flex-1 bg-gray-50 h-[calc(100vh-4rem)]">
     <section className="flex flex-col flex-1 bg-gray-50 min-h-[100dvh]">
       {/* Mobile back bar */}
-{/* <div className="sm:hidden sticky top-16 z-10 bg-gray-50/95 backdrop-blur px-4 py-2 border-b flex items-center gap-3"> */}
- <div className="sm:hidden sticky top-0 z-30 bg-white/90 backdrop-blur px-4 py-2 border-b flex items-center gap-3">
-
+{/* header */}
+ {/* <div className="sm:hidden sticky top-0 z-30 bg-white/90 backdrop-blur px-4 py-2 border-b flex items-center gap-3"> */}
+<div className="sm:hidden sticky top-0 z-30 bg-white/90 backdrop-blur px-4 pt-[calc(env(safe-area-inset-top)+0.5rem)] pb-2 border-b flex items-center gap-3">
   <button
     onClick={onBack}
     className="p-2 -ml-2 rounded-md hover:bg-gray-100"
